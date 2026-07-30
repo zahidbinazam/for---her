@@ -1,1 +1,479 @@
+/* ==========================================================================
+   1. CSS VARIABLES & RESET
+   ========================================================================== */
+:root {
+  --bg-dark: #05020a;
+  --pink-neon: #ff2a85;
+  --purple-neon: #9d4edd;
+  --blue-neon: #00f0ff;
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  --font-main: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  --font-serif: 'Georgia', serif;
+}
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: #ffffff;
+  font-family: var(--font-main);
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ==========================================================================
+   2. PRELOADER SCREEN
+   ========================================================================== */
+#preloader {
+  position: fixed;
+  inset: 0;
+  background-color: var(--bg-dark);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.preloader-heart {
+  font-size: 3.5rem;
+  animation: pulse 1.2s infinite ease-in-out;
+}
+
+.preloader-text {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #d1d1d1;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px var(--pink-neon);
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; text-shadow: 0 0 20px var(--pink-neon); }
+}
+
+#preloader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* ==========================================================================
+   3. BACKGROUND CANVAS & MOON & GLOWS
+   ========================================================================== */
+#bgCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.glowing-moon {
+  position: fixed;
+  top: 40px;
+  right: 50px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffffff, #e6f0ff 60%, #b0c4de 100%);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(0, 240, 255, 0.4);
+  z-index: 0;
+  pointer-events: none;
+  animation: moonGlow 4s infinite alternate ease-in-out;
+}
+
+@keyframes moonGlow {
+  0% { box-shadow: 0 0 25px rgba(255, 255, 255, 0.7), 0 0 50px rgba(0, 240, 255, 0.3); }
+  100% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.9), 0 0 80px rgba(255, 42, 133, 0.4); }
+}
+
+.ambient-glow {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: 
+    radial-gradient(circle at 15% 25%, rgba(255, 42, 133, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(157, 78, 221, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.08) 0%, transparent 50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   4. MAIN CONTAINER & COUPLE BADGES
+   ========================================================================== */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.couple-badge-container {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.couple-badge {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  padding: 0.6rem 1.4rem;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  color: #e0e0e0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.couple-badge span {
+  color: var(--pink-neon);
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(255, 42, 133, 0.6);
+}
+
+/* ==========================================================================
+   5. ROTATING GLOWING PROFILE FRAME
+   ========================================================================== */
+.profile-wrapper {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.glowing-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent, var(--pink-neon), var(--purple-neon), var(--blue-neon), transparent);
+  animation: spinRing 5s linear infinite;
+  box-shadow: 0 0 25px var(--pink-neon), 0 0 50px var(--purple-neon);
+}
+
+.glowing-ring::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  background: var(--bg-dark);
+  border-radius: 50%;
+}
+
+.profile-photo {
+  position: relative;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  object-fit: cover;
+  z-index: 2;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6);
+  animation: floatPhoto 4s ease-in-out infinite alternate;
+}
+
+@keyframes spinRing {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes floatPhoto {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-8px); }
+}
+
+/* ==========================================================================
+   6. TYPEWRITER & HEADINGS
+   ========================================================================== */
+.header-text {
+  text-align: center;
+  max-width: 700px;
+}
+
+.greeting-heading {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 0 15px var(--pink-neon);
+  margin-bottom: 0.5rem;
+}
+
+.typewriter-container {
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: #e0e0e0;
+  min-height: 2.5rem;
+  line-height: 1.6;
+  text-shadow: 0 0 10px rgba(157, 78, 221, 0.6);
+}
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1.8rem;
+  background-color: var(--pink-neon);
+  margin-left: 5px;
+  vertical-align: middle;
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ==========================================================================
+   7. GLASSMORPHISM CARDS & QUOTE & TIMER
+   ========================================================================== */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: var(--glass-shadow);
+  padding: 2rem;
+  width: 100%;
+  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 42, 133, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(255, 42, 133, 0.2);
+}
+
+.quote-card {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #f5e6ff;
+  line-height: 1.6;
+}
+
+.love-quote {
+  text-shadow: 0 0 12px rgba(255, 42, 133, 0.4);
+}
+
+.timer-section {
+  text-align: center;
+}
+
+.timer-section h2 {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  margin-bottom: 1.5rem;
+  color: var(--pink-neon);
+  text-shadow: 0 0 10px rgba(255, 42, 133, 0.5);
+}
+
+.timer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.timer-box {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1rem 0.5rem;
+}
+
+.timer-val {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0 12px var(--purple-neon);
+}
+
+.timer-unit {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-top: 0.3rem;
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   8. BUTTON & LOVE LETTER SECTION
+   ========================================================================== */
+.cta-btn {
+  background: linear-gradient(135deg, var(--pink-neon), var(--purple-neon));
+  color: #fff;
+  border: none;
+  padding: 1.1rem 2.8rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(255, 42, 133, 0.6);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.cta-btn:hover {
+  box-shadow: 0 0 40px rgba(255, 42, 133, 0.9);
+  transform: scale(1.06);
+}
+
+.letter-container {
+  display: none;
+  opacity: 0;
+  transform: scale(0.95) translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  font-family: var(--font-serif);
+  line-height: 1.9;
+  font-size: 1.1rem;
+  color: #f1e6ff;
+}
+
+.letter-container.show {
+  display: block;
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.letter-container h3 {
+  font-size: 1.6rem;
+  color: var(--pink-neon);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-shadow: 0 0 10px rgba(255, 42, 133, 0.5);
+}
+
+.letter-container p {
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+.letter-signature {
+  text-align: right;
+  margin-top: 2rem;
+  font-style: italic;
+}
+
+.letter-signature .sender-name {
+  font-size: 1.3rem;
+  color: var(--pink-neon);
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   9. AUDIO CONTROLLER
+   ========================================================================== */
+.audio-control {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 10;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  padding: 0.75rem 1.3rem;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s ease;
+}
+
+.audio-control:hover {
+  background: rgba(255, 42, 133, 0.25);
+  border-color: var(--pink-neon);
+}
+
+.audio-icon {
+  font-size: 1.2rem;
+}
+
+#audioText {
+  font-size: 0.85rem;
+  color: #fff;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   10. FOOTER
+   ========================================================================== */
+.site-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+  color: #8888aa;
+  font-size: 0.95rem;
+}
+
+.site-footer p {
+  text-shadow: 0 0 8px rgba(157, 78, 221, 0.4);
+}
+
+/* ==========================================================================
+   11. RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 650px) {
+  .glowing-moon {
+    width: 60px;
+    height: 60px;
+    top: 20px;
+    right: 20px;
+  }
+  .profile-wrapper {
+    width: 180px;
+    height: 180px;
+  }
+  .profile-photo {
+    width: 150px;
+    height: 150px;
+  }
+  .greeting-heading {
+    font-size: 1.75rem;
+  }
+  .typewriter-container {
+    font-size: 1.05rem;
+    min-height: 3rem;
+  }
+  .timer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .timer-val {
+    font-size: 1.7rem;
+  }
+  .letter-container {
+    font-size: 1rem;
+    padding: 1.5rem;
+  }
+            }
