@@ -1,1 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Labibah ❤️ | From Tasin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <!-- Preloader Loading Screen -->
+  <div id="preloader">
+    <div class="preloader-heart">❤️</div>
+    <div class="preloader-text">Loading Our Universe...</div>
+  </div>
+
+  <!-- Background Canvas & Celestial Elements -->
+  <canvas id="bgCanvas"></canvas>
+  <div class="glowing-moon"></div>
+  <div class="ambient-glow"></div>
+
+  <!-- Background Audio Controls (Uses local music.mp3) -->
+  <audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
+  <div class="audio-control" id="audioToggle">
+    <span class="audio-icon" id="audioIcon">🎵</span>
+    <span id="audioText">Play Music</span>
+  </div>
+
+  <main class="container">
+
+    <!-- Sender / Receiver Badges -->
+    <div class="couple-badge-container">
+      <div class="couple-badge">From: <span>Tasin ❤️</span></div>
+      <div class="couple-badge">To: <span>Labibah ❤️</span></div>
+    </div>
+    
+    <!-- Rotating Profile Frame (Uses local photo.jpg) -->
+    <div class="profile-wrapper">
+      <div class="glowing-ring"></div>
+      <img src="photo.jpg" alt="Labibah & Tasin" class="profile-photo">
+    </div>
+
+    <!-- Typewriter Animated Headlines -->
+    <div class="header-text">
+      <h1 class="greeting-heading"><span id="typewriterTitle"></span><span class="cursor"></span></h1>
+      <div class="typewriter-container">
+        <span id="typewriterSubtitle"></span>
+      </div>
+    </div>
+
+    <!-- Romantic Quote Card -->
+    <div class="glass-card quote-card">
+      <blockquote class="love-quote">
+        "Every love story is beautiful, but ours is my favorite."
+      </blockquote>
+    </div>
+
+    <!-- Live Relationship Timer -->
+    <div class="glass-card timer-section">
+      <h2>Days Together With Labibah</h2>
+      <div class="timer-grid">
+        <div class="timer-box">
+          <div class="timer-val" id="days">00</div>
+          <div class="timer-unit">Days</div>
+        </div>
+        <div class="timer-box">
+          <div class="timer-val" id="hours">00</div>
+          <div class="timer-unit">Hours</div>
+        </div>
+        <div class="timer-box">
+          <div class="timer-val" id="minutes">00</div>
+          <div class="timer-unit">Minutes</div>
+        </div>
+        <div class="timer-box">
+          <div class="timer-val" id="seconds">00</div>
+          <div class="timer-unit">Seconds</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Open My Heart Action Button -->
+    <button class="cta-btn" id="openHeartBtn">💌 Open My Heart</button>
+
+    <!-- Hidden Love Letter Card -->
+    <div class="glass-card letter-container" id="loveLetter">
+      <h3>My Dearest Labibah,</h3>
+      <p>Meeting you became one of the most beautiful chapters of my life.</p>
+      <p>Every smile of yours brings peace to my heart.</p>
+      <p>No matter how difficult life becomes, I will always cherish and respect you.</p>
+      <p>Thank you for being part of my life.</p>
+      <div class="letter-signature">
+        <p>Forever yours,</p>
+        <p class="sender-name">Tasin ❤️</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>Made with endless love by Tasin ❤️</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
