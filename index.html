@@ -19,12 +19,9 @@
   <div class="glowing-moon"></div>
   <div class="ambient-glow"></div>
 
-  <!-- Background Audio Controls (Uses local music.mp3) -->
-  <audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
-  <div class="audio-control" id="audioToggle">
-    <span class="audio-icon" id="audioIcon">🎵</span>
-    <span id="audioText">Play Music</span>
-  </div>
+  <audio id="bgMusic" autoplay loop playsinline preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
 
   <main class="container">
 
