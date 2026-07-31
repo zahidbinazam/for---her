@@ -9,8 +9,8 @@
   --glass-bg: rgba(255, 255, 255, 0.04);
   --glass-border: rgba(255, 255, 255, 0.12);
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-  --font-main: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-  --font-serif: 'Georgia', serif;
+  --font-main: 'Poppins', sans-serif;
+--font-serif: 'Playfair Display', serif;
 }
 
 * {
