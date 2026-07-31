@@ -476,3 +476,12 @@ body {
     padding: 1.5rem;
   }
             }
+.hero-title,
+.love-letter h2,
+.story-quote{
+    font-family: 'Great Vibes', cursive;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+}
