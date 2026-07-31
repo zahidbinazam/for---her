@@ -199,7 +199,7 @@ window.addEventListener('DOMContentLoaded', () => {
    4. LIVE RELATIONSHIP COUNTER
    ========================================================================== */
 // You can set your custom relationship start date here (YYYY-MM-DDTHH:MM:SS)
-const startDate = new Date('2023-01-01T00:00:00');
+const startDate = new Date('2024-08-20T00:00:00');
 
 function updateTimer() {
   const now = new Date();
